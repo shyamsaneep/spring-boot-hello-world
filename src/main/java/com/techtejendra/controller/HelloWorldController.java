@@ -10,6 +10,6 @@ public class HelloWorldController
 	public String hello()   
 	{  
 		java.util.Date date=new java.util.Date(); 
-		return "<center><H1>Greetings for the day</H1></br><h2 style=\"color:red;\">"+date+"</h2><center>";  
+		return "<center><H1>Greetings for the day</H1></br><h2 style=\"color:red;\">"+date+"</h2><h3 style=\"color:blue;\">version : 1.0</h3><center>";  
 	}  
 }
