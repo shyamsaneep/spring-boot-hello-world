@@ -8,8 +8,27 @@ public class HelloWorldController
 {  
 	@RequestMapping("/")  
 	public String hello()   
-	{  
-		java.util.Date date=new java.util.Date(); 
-		return "<center><H1>Greetings for the day</H1></br><h2 style=\"color:red;\">"+date+"</h2><h3 style=\"color:blue;\">version : 1.0</h3><center>";  
+	{
+		System.out.println(""); 
+		GetTimestamp t= new GetTimestamp();	    	
+		 String prev_timestamp = t.read();
+		 System.out.println("prev timestamp-----> "+prev_timestamp);
+		 
+		 //System.out.println("---------------------------------------------REading Again");
+		 
+		 java.util.Date date=new java.util.Date(); 
+		 String latest_timestamp = date.toString();
+		 t.write(latest_timestamp);
+		 
+		 String output;
+		 output = "<center><H1>Greetings for the day</H1>";
+		 output = output + "<h2 style='color:green;'>version : 2.0</h2>";
+		 output = output + "<h2 style='color:red;'> Previous Timestamp :"+prev_timestamp+"</h2>";
+		 output = output + "<h2 style='color:blue;'> Latest Timestamp :"+latest_timestamp+"</h2>";
+		 output = output + "";
+		 output = output + "";
+		 output = output + "</center>";
+	     
+		 return output;  
 	}  
 }
