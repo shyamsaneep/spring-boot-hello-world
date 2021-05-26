@@ -17,8 +17,9 @@ public class GetTimestamp {
 	static {
 		System.out.println("--------------GETING timestamp_file");
 		try {
-			File f = ResourceUtils.getFile("classpath:application.properties");
-			InputStream f1 = new FileInputStream(f);
+			//File f = ResourceUtils.getFile("classpath:application.properties");
+			//InputStream f1 = new FileInputStream(f);
+			InputStream f1 = GetTimestamp.class.getClassLoader().getResourceAsStream("application.properties");
 	        Properties prop = new Properties();
 	        prop.load(f1);
 	        timestamp_file = prop.getProperty("timestamp_file");
