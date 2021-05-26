@@ -1,4 +1,4 @@
-FROM maven:3.5-jdk-8-alpine AS build
+FROM quay.io/eclipse/che-java8-maven
 
 MAINTAINER tech-tejendra
 
