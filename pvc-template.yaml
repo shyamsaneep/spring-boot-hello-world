@@ -1,9 +1,20 @@
 apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
-  name: spring-boot-hello-world
+  name: pvc-template
   annotations:
-    openshift.io/display-name: spring-boot-hello-world Application
-    description: The spring-boot-hello-world application provides an HTTP API that returns timestamp.
-    tags: tsr
+    openshift.io/display-name: pvc-template
+    tags: tsrana, tech-tejendra
 objects:
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: claim1
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Mi
+  storageClassName: gp2
+  volumeMode: Filesystem
