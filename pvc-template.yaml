@@ -1,0 +1,9 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: spring-boot-hello-world
+  annotations:
+    openshift.io/display-name: spring-boot-hello-world Application
+    description: The spring-boot-hello-world application provides an HTTP API that returns timestamp.
+    tags: tsr
+objects:
