@@ -1,0 +1,142 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: docker-template
+objects:
+- apiVersion: v1
+  kind: ImageStream
+  metadata:
+    annotations:
+      description: Keeps track of changes in the application image
+    name: hello1    
+- kind: BuildConfig
+  apiVersion: v1
+  metadata:
+    name: hello1
+    namespace: tejendrarana-dev
+    labels:
+      app: hello1
+  spec:
+    nodeSelector: null
+    output:
+      to:
+        kind: ImageStreamTag
+        name: 'hello1:latest'
+    successfulBuildsHistoryLimit: 5
+    failedBuildsHistoryLimit: 5
+    strategy:
+      type: Docker
+      dockerStrategy:
+        dockerfilePath: Dockerfile
+      postCommit: {}
+    source:
+      type: Git
+      git:
+        uri: 'https://github.com/tsrana/spring-boot-hello-world'
+        ref: quay
+      contextDir: /
+    triggers:
+      - type: Generic
+        generic:
+          secretReference:
+            name: hello1-generic-webhook-secret
+      - type: GitHub
+        github:
+          secretReference:
+            name: hello1-github-webhook-secret
+      - type: ConfigChange
+    runPolicy: Serial
+- kind: DeploymentConfig
+  apiVersion: v1
+  metadata:
+    name: hello1
+    namespace: tejendrarana-dev
+    labels:
+      app: hello1
+  spec:
+    strategy:
+      type: Rolling
+      rollingParams:
+        updatePeriodSeconds: 1
+        intervalSeconds: 1
+        timeoutSeconds: 600
+        maxUnavailable: 25%
+        maxSurge: 25%
+      resources: {}
+      activeDeadlineSeconds: 21600
+    triggers:
+      - type: ImageChange
+        imageChangeParams:
+          automatic: true
+          containerNames:
+            - hello1
+          from:
+            kind: ImageStreamTag
+            namespace: tejendrarana-dev
+            name: 'hello1:latest'
+      - type: ConfigChange
+    replicas: 1
+    revisionHistoryLimit: 10
+    test: false
+    selector:
+      app: hello1
+      deploymentconfig: hello1
+    template:
+      metadata:
+        labels:
+          app: hello1
+          deploymentconfig: hello1
+      spec:
+        volumes:
+          - name: claim1
+            persistentVolumeClaim:
+              claimName: claim1
+        containers:
+          - name: hello1
+            resources: {}
+            volumeMounts:
+              - name: claim1
+                mountPath: /var/local/SP
+            terminationMessagePath: /dev/termination-log
+            terminationMessagePolicy: File
+            imagePullPolicy: Always
+        restartPolicy: Always
+        terminationGracePeriodSeconds: 30
+        dnsPolicy: ClusterFirst
+        securityContext: {}
+        schedulerName: default-scheduler
+- kind: Service
+  apiVersion: v1
+  metadata:
+    annotations:
+    name: hello1
+    namespace: tejendrarana-dev
+    labels:
+      app: hello1
+  spec:
+    ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    selector:
+      app: hello1
+      deploymentconfig: hello1
+    type: ClusterIP
+    sessionAffinity: None
+- kind: Route
+  apiVersion: route.openshift.io/v1
+  metadata:
+    name: hello1
+    namespace: tejendrarana-dev
+    labels:
+      app: hello1
+    annotations:
+  spec:
+    to:
+      kind: Service
+      name: hello1
+      weight: 100
+    port:
+      targetPort: 8080-tcp
+  wildcardPolicy: None

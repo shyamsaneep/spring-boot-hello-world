@@ -2,9 +2,6 @@ apiVersion: template.openshift.io/v1
 kind: Template
 metadata:
   name: pvc-template
-  annotations:
-    openshift.io/display-name: pvc-template
-    tags: tsrana, tech-tejendra
 objects:
 apiVersion: v1
 kind: PersistentVolumeClaim
