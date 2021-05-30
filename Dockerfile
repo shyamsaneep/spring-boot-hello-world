@@ -8,7 +8,7 @@ COPY src /home/app/src
 COPY pom.xml /home/app
 
 #ERROR
-RUN nocmd
+#RUN nocmd
 
 RUN mkdir -p /var/local/SP
 
