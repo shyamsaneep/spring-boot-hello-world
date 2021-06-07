@@ -23,7 +23,7 @@ public class HelloWorldController
 		 t.write(latest_timestamp);
 
 		 String run_env;
-		 run_env = System.getenv("run-env");
+		 run_env = System.getenv("RUN_ENV");
 		 
 		 String output;
 		 output = "<center><H1>Greetings for the day</H1>";
