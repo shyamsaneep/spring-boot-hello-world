@@ -21,13 +21,17 @@ public class HelloWorldController
 		 java.util.Date date=new java.util.Date(); 
 		 String latest_timestamp = date.toString();
 		 t.write(latest_timestamp);
+
+		 String run_env;
+		 run_env = System.getenv("run-env");
 		 
 		 String output;
 		 output = "<center><H1>Greetings for the day</H1>";
-		 output = output + "<h2 style='color:green;'>version : 6.0</h2>";
+		 output = output + "<h2 style='color:green;'>version : 7.0</h2>";
 		 output = output + "<h2 style='color:red;'> Previous Timestamp :"+prev_timestamp+"</h2>";
 		 output = output + "<h2 style='color:blue;'> Latest Timestamp :"+latest_timestamp+"</h2>";
-		 output = output + "";
+		 if(run_env != null)
+		 	output = output + "<h2 style='color:pink;'> Run Env :"+run_env+"</h2>";
 		 output = output + "";
 		 output = output + "</center>";
 	     
