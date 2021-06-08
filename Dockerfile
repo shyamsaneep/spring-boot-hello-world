@@ -1,9 +1,16 @@
-FROM maven:3.5-jdk-8-alpine AS build
+FROM quay.io/eclipse/che-java8-maven:nightly
 
 MAINTAINER tech-tejendra
 
+USER root
+
 COPY src /home/app/src
 COPY pom.xml /home/app
+
+#ERROR
+#RUN nocmd
+
+RUN mkdir -p /var/local/SP
 
 RUN mvn -f /home/app/pom.xml clean package
 
