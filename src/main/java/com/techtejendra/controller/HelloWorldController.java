@@ -31,7 +31,7 @@ public class HelloWorldController
 		 output = output + "<h2 style='color:red;'> Previous Timestamp :"+prev_timestamp+"</h2>";
 		 output = output + "<h2 style='color:blue;'> Latest Timestamp :"+latest_timestamp+"</h2>";
 		 if(run_env != null)
-		 	output = output + "<h2 style='color:pink;'> Run Env :"+run_env+"</h2>";
+		 	output = output + "<h2 style='color:#f90e4e;'> Run Env :"+run_env+"</h2>";
 		 output = output + "";
 		 output = output + "</center>";
 	     
