@@ -1,4 +1,4 @@
-FROM quay.io/eclipse/che-java8-maven:nightly
+FROM cloudsihmar/maven:spring
 
 MAINTAINER tech-tejendra
 
