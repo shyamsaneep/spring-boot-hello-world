@@ -20,7 +20,7 @@ public class GetTimestamp {
 	        Properties prop = new Properties();
 	        prop.load(f1);
 	        timestamp_file = prop.getProperty("timestamp_file");
-	        System.out.println("------------------ timestamp_file = "+timestamp_file);
+	        System.out.println("------------------- timestamp_file = "+timestamp_file);
 		} catch (IOException ex) {
             ex.printStackTrace();
         }
