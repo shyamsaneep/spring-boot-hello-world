@@ -1,4 +1,4 @@
-# another file1
+# another file
 FROM openjdk:22-oracle
 
 USER root
