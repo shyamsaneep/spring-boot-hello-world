@@ -1,4 +1,4 @@
-# another file7
+# for teamcity example
 FROM openjdk:22-oracle
 
 USER root
