@@ -1,4 +1,4 @@
-# for teamcity example
+# for teamcity example1
 FROM openjdk:22-oracle
 
 USER root
