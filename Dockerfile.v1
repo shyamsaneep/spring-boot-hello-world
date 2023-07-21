@@ -7,7 +7,7 @@ WORKDIR /app
 
 COPY . .
 
-RUN  mv target/spring-boot-hello-world-0.0.1-SNAPSHOT.jar /run/app.jar
+RUN  mv spring-boot-hello-world-0.0.1-SNAPSHOT.jar /run/app.jar
 
 EXPOSE 8080
 
